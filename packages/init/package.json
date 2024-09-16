@@ -14,7 +14,7 @@
     "lib"
   ],
   "publishConfig": {
-    "registry": "https://registry.npmmirror.com/"
+    "access": "public"
   },
   "dependencies": {
     "@learn-develop-cli/command": "^0.0.0",
