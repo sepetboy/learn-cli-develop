@@ -1,0 +1,15 @@
+0 silly argv {
+0 silly argv   _: [ 'create' ],
+0 silly argv   lernaVersion: '8.1.8',
+0 silly argv   '$0': 'C:\\Users\\14841\\AppData\\Roaming\\npm\\node_modules\\lerna\\dist\\cli.js',
+0 silly argv   name: 'cli'
+0 silly argv }
+1 notice cli v8.1.8
+2 verbose packageConfigs Resolving packages based on package.json "workspaces" configuration.
+3 verbose rootPath G:\学习\脚手架\自主搭建5个精品脚手架\学习\learn-cli-develop
+4 error Error: Command failed with exit code 1: git config --get user.email
+4 error     at makeError (G:\学习\脚手架\自主搭建5个精品脚手架\学习\learn-cli-develop\node_modules\execa\lib\error.js:59:11)
+4 error     at module.exports.sync (G:\学习\脚手架\自主搭建5个精品脚手架\学习\learn-cli-develop\node_modules\execa\index.js:186:17)
+4 error     at execSync (G:\学习\脚手架\自主搭建5个精品脚手架\学习\learn-cli-develop\node_modules\@lerna\create\dist\command.js:1505:31)
+4 error     at CreateCommand.gitConfig (G:\学习\脚手架\自主搭建5个精品脚手架\学习\learn-cli-develop\node_modules\@lerna\create\dist\command.js:5481:16)
+4 error     at CreateCommand.initialize (G:\学习\脚手架\自主搭建5个精品脚手架\学习\learn-cli-develop\node_modules\@lerna\create\dist\command.js:5415:51)

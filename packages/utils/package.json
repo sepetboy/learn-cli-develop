@@ -1,0 +1,26 @@
+{
+  "name": "@learn-develop-cli/utils",
+  "version": "0.0.0",
+  "description": "@learn-develop-cli utils",
+  "author": "hutingjin <hutjin900722@163.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmmirror.com/"
+  },
+  "scripts": {
+    "test": "node ./__tests__/utils.test.js"
+  },
+  "dependencies": {
+    "npmlog": "^7.0.1"
+  },
+  "type": "module"
+}

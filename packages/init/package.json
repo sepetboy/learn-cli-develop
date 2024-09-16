@@ -1,0 +1,27 @@
+{
+  "name": "@learn-develop-cli/init",
+  "version": "0.0.0",
+  "description": "init command",
+  "author": "hutingjin <hutjin900722@163.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmmirror.com/"
+  },
+  "dependencies": {
+    "@learn-develop-cli/command": "^0.0.0",
+    "@learn-develop-cli/utils": "^0.0.0"
+  },
+  "scripts": {
+    "test": "node ./__tests__/init.test.js"
+  },
+  "type": "module"
+}
