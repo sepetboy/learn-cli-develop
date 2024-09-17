@@ -1,5 +1,5 @@
 {
-  "name": "@learn-develop-cli/utils",
+  "name": "@learn-cli-develop/utils",
   "version": "0.0.0",
   "description": "@learn-develop-cli utils",
   "author": "hutingjin <hutjin900722@163.com>",
@@ -20,7 +20,10 @@
     "test": "node ./__tests__/utils.test.js"
   },
   "dependencies": {
-    "npmlog": "^7.0.1"
+    "axios": "^1.7.7",
+    "inquirer": "^11.0.1",
+    "npmlog": "^7.0.1",
+    "url-join": "^5.0.0"
   },
   "type": "module"
 }

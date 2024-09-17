@@ -1,4 +1,4 @@
-import { log, isDebug } from "@learn-develop-cli/utils";
+import { log, isDebug } from "@learn-cli-develop/utils";
 
 function printErrorLog(e, type) {
   if (isDebug()) {

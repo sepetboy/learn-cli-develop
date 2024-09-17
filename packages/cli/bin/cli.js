@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import importLocal from "import-local";
-import { log } from "@learn-develop-cli/utils";
 import { filename } from "dirname-filename-esm";
+import { log } from "@learn-cli-develop/utils";
 import entry from "../lib/index.js";
 
 const __filename = filename(import.meta);

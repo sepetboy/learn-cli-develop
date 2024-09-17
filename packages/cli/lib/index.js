@@ -1,4 +1,4 @@
-import createInitCommand from "@learn-develop-cli/init";
+import createInitCommand from "@learn-cli-develop/init";
 import createCli from "./createCli.js";
 import "./exception.js";
 
