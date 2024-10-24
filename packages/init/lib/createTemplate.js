@@ -5,23 +5,31 @@ import {
   makeList,
   makeInput,
   getLatestVersion,
+  request,
+  printErrorLog,
 } from "@learn-cli-develop/utils";
 const ADD_TYPE_PROJECT = "project";
 const ADD_TYPE_PAGE = "page";
-const ADD_TEMPLATE = [
-  {
-    name: "vue3项目模版",
-    value: "template-vue3",
-    npmName: "@learn-cli-develop/template-vue3",
-    version: "1.0.0",
-  },
-  {
-    name: "react18项目模版",
-    value: "template-react18",
-    npmName: "@learn-cli-develop/template-react18",
-    version: "1.0.0",
-  },
-];
+// const ADD_TEMPLATE = [
+//   {
+//     name: "vue3项目模版",
+//     value: "template-vue3",
+//     npmName: "@learn-cli-develop/template-vue3",
+//     version: "1.0.0",
+//   },
+//   {
+//     name: "react18项目模版",
+//     value: "template-react18",
+//     npmName: "@learn-cli-develop/template-react18",
+//     version: "1.0.0",
+//   },
+//   {
+//     name: "vue-element-admin项目模版",
+//     value: "template-vue-element-admin",
+//     npmName: "@learn-cli-develop/template-vue-element-admin",
+//     version: "1.0.0",
+//   },
+// ];
 const ADD_TYPE = [
   {
     name: "项目",
@@ -58,7 +66,7 @@ function getAddName() {
 }
 
 // 选择项目模版
-function getAddTemplate() {
+function getAddTemplate(ADD_TEMPLATE) {
   return makeList({
     choices: ADD_TEMPLATE,
     message: "请选择项目模版",
@@ -71,7 +79,33 @@ function makeTargetPath() {
   return path.resolve(`${homedir()}/${TEMP_HOME}`, "addTemplate");
 }
 
+// 选择所在团队
+function getAddTeam(team) {
+  return makeList({
+    choices: team.map((item) => ({ name: item, value: item })),
+    message: "请选择团队",
+  });
+}
+
+// 通过API获取项目模版
+async function getTemplateFromAPI() {
+  try {
+    const data = await request({
+      url: "/v1/project",
+      method: "get",
+    });
+    return data;
+  } catch (error) {
+    printErrorLog(error);
+    return null;
+  }
+}
+
 export default async function createTemplate(name, opts) {
+  const ADD_TEMPLATE = await getTemplateFromAPI();
+  if (!ADD_TEMPLATE) {
+    throw new Error("项目模板不存在！");
+  }
   let { type = null, template = null } = opts;
   let addType, // 创建的项目类型
     addName, // 创建的项目名称
@@ -95,12 +129,19 @@ export default async function createTemplate(name, opts) {
         throw new Error(`项目模板 ${template} 不存在！`);
       }
     } else {
-      const addTemplate = await getAddTemplate();
+      let teamList = ADD_TEMPLATE.map((item) => item.team);
+      teamList = [...new Set(teamList)];
+      log.verbose("teamList", teamList);
+      const addTeam = await getAddTeam(teamList);
+      log.verbose("addTeam", addTeam);
+      // 模版根据团队筛选
+      const addTemplate = await getAddTemplate(
+        ADD_TEMPLATE.filter((item) => item.team === addTeam)
+      );
       selectedTemplate = ADD_TEMPLATE.find(
         (item) => item.value === addTemplate
       );
     }
-    log.verbose("selectedTemplate", selectedTemplate);
     // 获取最新的npm版本号
     const latestVersion = await getLatestVersion(selectedTemplate.npmName);
     log.verbose("latestVersion", latestVersion);

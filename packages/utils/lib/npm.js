@@ -2,8 +2,8 @@ import urlJoin from "url-join";
 import axios from "axios";
 import log from "./log.js";
 function getNpmInfo(npmName) {
-  const registry = "https://registry.npmmirror.com";
-  //   const registry = "https://registry.npmjs.org";
+  //   const registry = "https://registry.npmmirror.com";
+  const registry = "https://registry.npmjs.org";
   const url = urlJoin(registry, npmName);
   return axios.get(url).then((response) => {
     // console.log(response);

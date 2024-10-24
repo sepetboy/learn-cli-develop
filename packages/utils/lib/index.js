@@ -1,7 +1,11 @@
 import log from "./log.js";
 import isDebug from "./isDebug.js";
-import { makeList, makeInput } from "./inquirer.js";
+import { makeList, makeInput, makePassword } from "./inquirer.js";
 import { getLatestVersion } from "./npm.js";
+import request from "./request.js";
+import Github from "./git/Github.js";
+import Gitee from "./git/Gitee.js";
+import { getGitPlatForm } from "./git/GitServer.js";
 
 export function printErrorLog(e, type) {
   if (isDebug()) {
@@ -11,4 +15,15 @@ export function printErrorLog(e, type) {
   }
 }
 
-export { log, isDebug, makeList, makeInput, getLatestVersion };
+export {
+  log,
+  isDebug,
+  makeList,
+  makeInput,
+  makePassword,
+  getLatestVersion,
+  request,
+  Github,
+  Gitee,
+  getGitPlatForm,
+};
