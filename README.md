@@ -9,3 +9,5 @@ lerna create utils
 # learn 教程
 
 https://juejin.cn/post/6980887310980087815
+
+npm config set registry=https://registry.npmmirror.com
