@@ -1,6 +1,8 @@
 import Command from "@learn-cli-develop/command";
 import { log } from "@learn-cli-develop/utils";
 import { ESLint } from "eslint";
+import jest from "jest";
+import Mocha from "mocha";
 // import vueConfig from "./eslint/vueConfig.js"; //注意添加js后缀
 import path from "node:path";
 import { dirname } from "dirname-filename-esm"; // esm模式，没有__dirname变量，在此处进行转换
@@ -51,13 +53,27 @@ class LintCommand extends Command {
       overrideConfigFile: configPath,
     });
     const results = await eslint.lintFiles(["./src/**/*.js", "./src/**/*.vue"]);
-    console.log("results", results);
     const formatter = await eslint.loadFormatter("stylish");
     const resultText = formatter.format(results);
     console.log(resultText);
     const eslintResult = this.parseESLintResult(resultText);
     log.verbose("eslintResult", eslintResult);
-    // 2、jest/mocha
+    log.success(
+      "eslint检查完毕",
+      "错误：" + eslintResult.errors,
+      "，警告：" + eslintResult.warnings
+    );
+    // 2、jest
+    log.info("自动执行jest测试");
+    await jest.run("test");
+    log.success("jest测试执行完毕");
+    // 3、mocha
+    log.info("自动执行mocha测试");
+    const mochaInstance = new Mocha();
+    mochaInstance.addFile(path.resolve(cwd, "__tests__/mocha_test.js"));
+    mochaInstance.run(() => {
+      log.success("mocha测试执行完毕");
+    });
   }
 
   // preAction() {

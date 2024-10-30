@@ -29,6 +29,8 @@
   "type": "module",
   "dependencies": {
     "eslint": "^9.13.0",
-    "eslint-plugin-vue": "^9.30.0"
+    "eslint-plugin-vue": "^9.30.0",
+    "jest": "^29.7.0",
+    "mocha": "^10.8.1"
   }
 }
