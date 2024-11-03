@@ -1,5 +1,5 @@
 {
-  "name": "@learn-cli-develop/install",
+  "name": "@learn-cli-develop/commit",
   "version": "0.0.0",
   "description": "> TODO: description",
   "author": "hutingjin <hutjin900722@163.com>",
@@ -21,7 +21,7 @@
     "url": "git+https://github.com/sepetboy/learn-cli-develop.git"
   },
   "scripts": {
-    "test": "node ./__tests__/install.test.js"
+    "test": "node ./__tests__/commit.test.js"
   },
   "bugs": {
     "url": "https://github.com/sepetboy/learn-cli-develop/issues"
@@ -29,8 +29,8 @@
   "type": "module",
   "dependencies": {
     "@learn-cli-develop/command": "^0.0.0",
-    "@learn-cli-develop/utils": "^0.0.0",
-    "ora": "^8.1.0",
-    "org": "^0.2.0"
+    "fs-extra": "^11.2.0",
+    "semver": "^7.6.3",
+    "simple-git": "^3.27.0"
   }
 }

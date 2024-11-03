@@ -8,8 +8,10 @@ import { makePassword } from "../inquirer.js";
 import log from "../log.js";
 
 const TEMP_HOME = ".learn-cli-develop";
-const TEMP_TOKEN = ".token";
+const TEMP_TOKEN = ".git_token";
 const TEMP_PLATFORM = ".git_platform";
+const TEMP_OWN = ".git_own";
+const TEMP_LOGIN = ".git_login";
 
 function createTokenPath() {
   return path.resolve(homedir(), TEMP_HOME, TEMP_TOKEN);
@@ -19,9 +21,30 @@ function createPlatformPath() {
   return path.resolve(homedir(), TEMP_HOME, TEMP_PLATFORM);
 }
 
+function createOwnPath() {
+  return path.resolve(homedir(), TEMP_HOME, TEMP_OWN);
+}
+
+function createLoginPath() {
+  return path.resolve(homedir(), TEMP_HOME, TEMP_LOGIN);
+}
+
 function getGitPlatForm() {
   if (pathExistsSync(createPlatformPath())) {
     return fs.readFileSync(createPlatformPath()).toString();
+  }
+  return null;
+}
+
+function getGitOwn() {
+  if (pathExistsSync(createOwnPath())) {
+    return fs.readFileSync(createOwnPath()).toString();
+  }
+  return null;
+}
+function getGitLogin() {
+  if (pathExistsSync(createLoginPath())) {
+    return fs.readFileSync(createLoginPath()).toString();
   }
   return null;
 }
@@ -52,9 +75,25 @@ class GitServer {
     this.platform = platform;
     fs.writeFileSync(createPlatformPath(), platform);
   }
+  saveOwn(own) {
+    this.own = own;
+    fs.writeFileSync(createOwnPath(), own);
+  }
+  saveLogin(login) {
+    this.login = login;
+    fs.writeFileSync(createLoginPath(), login);
+  }
 
   getPlatForm() {
     return this.platform;
+  }
+
+  getOwn() {
+    return this.own;
+  }
+
+  getLogin() {
+    return this.login;
   }
 
   cloneRepo(fullName, tag) {
@@ -106,6 +145,18 @@ class GitServer {
       }
     }
   }
+
+  getUser() {
+    throw new Error("this method getUser must be implemented!");
+  }
+
+  getOrg() {
+    throw new Error("this method getOrg must be implemented!");
+  }
+
+  createRepo() {
+    throw new Error("this method createRepo must be implemented!");
+  }
 }
 
 function getPackageJson(cwd, fullName) {
@@ -122,4 +173,15 @@ function getProjectPath(cwd, fullName) {
   return path.resolve(cwd, projectName);
 }
 
-export { GitServer, getGitPlatForm };
+function clearCache() {
+  const platform = createPlatformPath();
+  const token = createTokenPath();
+  const own = createOwnPath();
+  const login = createLoginPath();
+  fse.removeSync(platform);
+  fse.removeSync(token);
+  fse.removeSync(own);
+  fse.removeSync(login);
+}
+
+export { GitServer, getGitPlatForm, clearCache, getGitOwn, getGitLogin };

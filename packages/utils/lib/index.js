@@ -5,7 +5,17 @@ import { getLatestVersion } from "./npm.js";
 import request from "./request.js";
 import Github from "./git/Github.js";
 import Gitee from "./git/Gitee.js";
-import { getGitPlatForm } from "./git/GitServer.js";
+import {
+  getGitPlatForm,
+  clearCache,
+  getGitOwn,
+  getGitLogin,
+} from "./git/GitServer.js";
+import {
+  initGitServer,
+  initGitType,
+  createRemoteRepo,
+} from "./git/GitUtils.js";
 
 export function printErrorLog(e, type) {
   if (isDebug()) {
@@ -26,4 +36,10 @@ export {
   Github,
   Gitee,
   getGitPlatForm,
+  initGitServer,
+  initGitType,
+  clearCache,
+  getGitOwn,
+  getGitLogin,
+  createRemoteRepo,
 };

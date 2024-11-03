@@ -7,6 +7,7 @@ import {
   getGitPlatForm,
   makeInput,
   printErrorLog,
+  initGitServer,
 } from "@learn-cli-develop/utils";
 import ora from "ora";
 
@@ -79,32 +80,7 @@ class InstallCommand extends Command {
   }
 
   async generateGitAPI() {
-    let platform = getGitPlatForm();
-    if (!platform) {
-      platform = await makeList({
-        message: "请选择Git平台",
-        choices: [
-          {
-            name: "GitHub",
-            value: "github",
-          },
-          {
-            name: "Gitee",
-            value: "gitee",
-          },
-        ],
-      });
-    }
-    let gitAPI;
-    console.log("platform", platform);
-    if (platform === "github") {
-      gitAPI = new Github();
-    } else {
-      gitAPI = new Gitee();
-    }
-    gitAPI.savePlatForm(platform);
-    await gitAPI.init();
-    this.gitAPI = gitAPI;
+    this.gitAPI = await initGitServer();
   }
 
   async searchGitAPI() {

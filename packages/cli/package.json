@@ -24,6 +24,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@learn-cli-develop/command": "^0.0.0",
     "@learn-cli-develop/init": "^0.0.0",
     "@learn-cli-develop/install": "^0.0.0",
     "@learn-cli-develop/lint": "^0.0.0",
